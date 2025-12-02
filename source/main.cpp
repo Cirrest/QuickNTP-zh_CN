@@ -184,7 +184,7 @@ public:
             return false;
         });
 
-        list->addItem(new tsl::elm::CategoryHeader("选择服务器   |   \uE0E0  同步   |   \uE0E3  偏移量"));
+        list->addItem(new tsl::elm::CategoryHeader("选择服务器   |   \uE0E0  同步   |   \uE0E3  获取偏移量"));
 
         auto* trackbar = new tsl::elm::NamedStepTrackBarVector("\uE017", serverNames);
         trackbar->setValueChangedListener([this](u8 val) {
@@ -210,7 +210,7 @@ public:
         list->addItem(getOffsetItem);
 
         list->addItem(new tsl::elm::CustomDrawer([](tsl::gfx::Renderer* renderer, s32 x, s32 y, s32 w, s32 h) {
-                          renderer->drawString("获取与所选服务器的秒数偏移量。\n\n\uE016  各位吴彦祖刘亦菲们，±3秒的误差是正常不影响使用的。", false, x + 20, y + 20, 15, renderer->a(tsl::style::color::ColorDescription));
+                          renderer->drawString("获取与所选服务器的秒数偏移量。\n\n\uE016  各位吴彦祖刘亦菲们，±3秒的误差是正常不\n影响使用的。", false, x + 20, y + 20, 15, renderer->a(tsl::style::color::ColorDescription));
                       }),
                       70);
 
