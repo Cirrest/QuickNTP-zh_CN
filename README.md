@@ -2,51 +2,58 @@
 
 ---
 
-### Update your Nintendo Switch clock using a list of NTP servers
+### 使用 NTP 服务器列表更新您的 Nintendo Switch 时钟
 
-When using a custom DNS (or a limited connection), it might not be possible to update your clock using Nintendo servers, causing the Switch to get out of sync easily.
+使用自定义 DNS（或受限连接）时，可能无法通过 Nintendo 服务器更新时钟，导致 Switch 容易出现时间不同步的情况。
 
-With this [Tesla](https://github.com/WerWolv/libtesla) plugin, you can now quickly update your clock using your custom [NTP](https://en.wikipedia.org/wiki/Network_Time_Protocol) servers!
-
-[![QuickNTP badge][version-badge]][changelog] [![GPLv2 License Badge][license-badge]][license] [![Build master branch and upload](https://github.com/nedex/QuickNTP/actions/workflows/build-master.yml/badge.svg)](https://github.com/nedex/QuickNTP/actions/workflows/build-master.yml)
+有了这款插件，您现在可以使用自定义的 [NTP](https://en.wikipedia.org/wiki/Network_Time_Protocol) 服务器快速更新时钟！
 
 ---
 
 ![Preview](https://github.com/user-attachments/assets/0218a5e6-92be-44ed-9de1-af400927a493)
 
-## Features
+## 功能
 
-- Update the time by selecting from a list of servers ([customizable!](#customize-servers))
-- Show the current offset compared to the selected server
-- Set the internal network time to the time set by the user in system settings (time traveling, yay!)
+- 通过从服务器列表中选择来更新时间（[可自定义！](#customize-servers)）
 
-### Customize servers
+- 显示当前时间与所选服务器的偏移量
 
-Since v1.5.0, you can create or modify the provided `quickntp.ini` file, with the following syntax:
+- 将内部网络时间设置为用户在系统设置中设置的时间（穿越时空，耶！）
+
+### 自定义服务器
+
+自 v1.5.0 版本起，您可以使用以下语法创建或修改提供的 `quickntp.ini` 文件：
 
 ```ini
 [Servers]
 My_Ntp_Server = ntp.example.com
 ```
 
-Underscores will be replaced by spaces in the UI!
+用户界面中下划线将被空格替换！
 
-The homebrew will look for the file in the following locations (*the first valid file will be used*):
+自制程序将在以下位置查找该文件（*将使用第一个有效文件*）：
+
 - /config/quickntp.ini
+
 - /config/quickntp/config.ini
+
 - /switch/.overlays/quickntp.ini
 
-**Note**: If the file is missing or invalid, only the `NTP Pool Main` server will be shown.
+**注意**：如果文件缺失或无效，则只会显示“NTP Pool Main”服务器。
 
-## Possible future features
+## 未来可能的功能
 
-- Better error handling / messages
-- Show a clock with seconds
-- Turn the heart icon into a clock (need to check the font)
-- Get the time in a separate thread
-- Pick the closest NTP server based on user region
-- Update the time with milliseconds (may be a system limitation)
+- 改进错误处理/消息
 
+- 显示带秒数的时钟
+
+- 将心形图标转换为时钟（需要检查字体）
+
+- 在单独的线程中获取时间
+
+- 根据用户所在地区选择最近的 NTP 服务器
+
+- 以毫秒为单位更新时间（可能受系统限制）
 ## Contributors
 
 - [@DarkMatterCore](https://github.com/DarkMatterCore) (library updates)
@@ -74,15 +81,17 @@ The homebrew will look for the file in the following locations (*the first valid
 - [Google Public NTP](https://developers.google.com/time)
 - [NIST Internet Time Servers](https://tf.nist.gov/tf-cgi/servers.cgi)
 
-## Troubleshooting
+## 故障排除
 
-- The "Synchronize Clock via Internet" option should be enabled in System Settings [as described here](https://en-americas-support.nintendo.com/app/answers/detail/a_id/22557/p/989/c/188), since this program changes the "Network clock" (which is immutable in settings).
-- If the only server shown is `NTP Pool Main`, there is a problem with the `quickntp.ini` file located in the `config` directory on the SD card. More details [here](#customize-servers).
+- 系统设置中应启用“通过互联网同步时钟”选项（具体操作请参见此处：https://en-americas-support.nintendo.com/app/answers/detail/a_id/22557/p/989/c/188），因为此程序会更改“网络时钟”（该设置不可更改）。
 
-## Disclaimer
+- 如果仅显示“NTP Pool Main”服务器，则说明 SD 卡“config”目录中的“quickntp.ini”文件存在问题。更多详情请参见此处：#customize-servers。
 
-- Please don't send a lot of requests to public servers. NTP servers should only be queried at 36-hour intervals.
-- This program changes the NetworkSystemClock, which may cause a desync between the console and servers. Use at your own risk!
+## 免责声明
+
+- 请勿频繁向公共服务器发送请求。NTP 服务器的查询间隔应为 36 小时。
+
+- 此程序会更改 NetworkSystemClock，这可能会导致主机与服务器之间出现时间不同步的情况。请自行承担风险！
 
 [version-badge]: https://img.shields.io/github/v/release/nedex/QuickNTP
 [changelog]: ./CHANGELOG.md
