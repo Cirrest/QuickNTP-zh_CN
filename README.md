@@ -1,4 +1,4 @@
-# QuickNTP
+# QuickNTP-zh_CN
 
 ---
 
