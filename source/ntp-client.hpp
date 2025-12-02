@@ -11,7 +11,7 @@
 
 #define UNIX_OFFSET 2208988800L
 
-#define NTP_DEFAULT_SERVER "pool.ntp.org"
+#define NTP_DEFAULT_SERVER "ntp.ntsc.ac.cn"
 #define NTP_DEFAULT_PORT "123"
 #define NTP_DEFAULT_TIMEOUT 3
 
@@ -66,7 +66,7 @@ public:
         hints = (struct addrinfo){.ai_family = AF_INET, .ai_socktype = SOCK_DGRAM};
 
         if ((status = getaddrinfo(m_server, m_port, &hints, &servinfo)) != 0) {
-            throw NtpException(1, "Unable to get address info (" + std::string(gai_strerror(status)) + ")");
+            throw NtpException(1, "无法获取地址信息 (" + std::string(gai_strerror(status)) + ")");
         }
 
         struct addrinfo* ap;
@@ -85,13 +85,13 @@ public:
             if (setsockopt(server_sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
                 close(server_sock);
                 freeaddrinfo(servinfo);
-                throw NtpException(2, "Unable to set socket receive timeout");
+                throw NtpException(2, "连接超时，无法获取数据");
             }
 
             if (setsockopt(server_sock, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) < 0) {
                 close(server_sock);
                 freeaddrinfo(servinfo);
-                throw NtpException(3, "Unable to set socket send timeout");
+                throw NtpException(3, "连接超时，无法获取数据");
             }
 
             if (sendto(server_sock, &packet, sizeof(packet), 0, ap->ai_addr, ap->ai_addrlen) == -1) {
@@ -112,7 +112,7 @@ public:
 
         freeaddrinfo(servinfo);
         if (!time_retrieved) {
-            throw NtpException(4, "Unable to connect to NTP server");
+            throw NtpException(4, "无法连接到 NTP 服务器");
         }
 
         close(server_sock);
